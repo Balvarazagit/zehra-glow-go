@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 
 const Booking = () => {
   const { createBooking } = useBooking()
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -18,112 +19,338 @@ const Booking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (!formData.name || !formData.phone || !formData.address || !formData.date || !formData.time) {
+
+    if (
+      !formData.name ||
+      !formData.phone ||
+      !formData.address ||
+      !formData.date ||
+      !formData.time
+    ) {
       toast.error('Please fill all required fields')
       return
     }
+
     await createBooking(formData)
+
+    toast.success('Booking Confirmed Successfully ✨')
+
     setFormData({
-      name: '', phone: '', service: 'Facial & Waxing Basic', address: '', date: '', time: '', notes: ''
+      name: '',
+      phone: '',
+      service: 'Facial & Waxing Basic',
+      address: '',
+      date: '',
+      time: '',
+      notes: '',
     })
   }
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    })
   }
 
   return (
-    <section id="booking-section" className="py-16 md:py-24">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-[#FFF8F4] to-[#FFEFE7] dark:from-[#111111] dark:to-[#1A1414] overflow-hidden">
       <div className="container mx-auto px-5 md:px-8">
-        <div className="max-w-3xl mx-auto">
-          <SectionTitle 
-            title="Book Your Glow Session" 
-            subtitle="Reserve your spot in seconds"
+        <div className="max-w-4xl mx-auto">
+          <SectionTitle
+            title="Book Your Glow Session"
+            subtitle="Reserve your luxury beauty appointment in seconds"
           />
-          
+
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="glass-card p-6 md:p-8 rounded-3xl shadow-2xl"
+            transition={{ duration: 0.5 }}
+            className="
+              relative
+              overflow-hidden
+              rounded-[36px]
+              border
+              border-roseGold/20
+              bg-white/80
+              dark:bg-gradient-to-br
+              dark:from-[#1B1818]
+              dark:to-[#2B2222]
+              backdrop-blur-2xl
+              shadow-2xl
+              p-6
+              md:p-10
+            "
           >
-            <form onSubmit={handleSubmit}>
+            {/* Glow */}
+            <div className="absolute inset-0 bg-gradient-to-r from-roseGold/5 to-transparent"></div>
+
+            <form onSubmit={handleSubmit} className="relative z-10">
               <div className="grid md:grid-cols-2 gap-5">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Full Name *"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                  required
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number *"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                  required
-                />
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                >
-                  <option>Facial & Waxing Basic</option>
-                  <option>Cleanup & Waxing</option>
-                  <option>Facial & Waxing Full</option>
-                  <option>Bridal Makeup</option>
-                  <option>Hair Spa Treatment</option>
-                </select>
-                <input
-                  type="text"
-                  name="address"
-                  placeholder="Your Address *"
-                  value={formData.address}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                  required
-                />
-                <input
-                  type="date"
-                  name="date"
-                  value={formData.date}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                  required
-                />
-                <input
-                  type="time"
-                  name="time"
-                  value={formData.time}
-                  onChange={handleChange}
-                  className="w-full p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                  required
-                />
-                <textarea
-                  name="notes"
-                  rows="2"
-                  placeholder="Special requests (modest preferences)"
-                  value={formData.notes}
-                  onChange={handleChange}
-                  className="md:col-span-2 p-3 rounded-xl border border-roseGold/30 bg-white/70 dark:bg-gray-800/70 focus:border-roseGold transition"
-                ></textarea>
+                {/* Name */}
+                <div>
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Full Name
+                  </label>
+
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                    "
+                  />
+                </div>
+
+                {/* Phone */}
+                <div>
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Phone Number
+                  </label>
+
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Enter your phone number"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                    "
+                  />
+                </div>
+
+                {/* Service */}
+                <div>
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Select Service
+                  </label>
+
+                  <select
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                    "
+                  >
+                    <option>Facial & Waxing Basic</option>
+                    <option>Cleanup & Waxing</option>
+                    <option>Facial & Waxing Full</option>
+                    <option>Bridal Makeup</option>
+                    <option>Hair Spa Treatment</option>
+                  </select>
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Address
+                  </label>
+
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Enter your address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    required
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                    "
+                  />
+                </div>
+
+                {/* Date */}
+                <div>
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Appointment Date
+                  </label>
+
+                  <input
+                    type="date"
+                    name="date"
+                    value={formData.date}
+                    onChange={handleChange}
+                    required
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                    "
+                  />
+                </div>
+
+                {/* Time */}
+                <div>
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Appointment Time
+                  </label>
+
+                  <input
+                    type="time"
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    required
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                    "
+                  />
+                </div>
+
+                {/* Notes */}
+                <div className="md:col-span-2">
+                  <label className="text-sm font-medium text-luxuryBrown dark:text-gray-200 mb-2 block">
+                    Special Requests
+                  </label>
+
+                  <textarea
+                    name="notes"
+                    rows="4"
+                    placeholder="Any modest preferences or special requests..."
+                    value={formData.notes}
+                    onChange={handleChange}
+                    className="
+                      w-full
+                      p-4
+                      rounded-2xl
+                      border
+                      border-roseGold/20
+                      bg-white/70
+                      dark:bg-[#2A2323]
+                      dark:text-white
+                      focus:outline-none
+                      focus:border-roseGold
+                      focus:ring-2
+                      focus:ring-roseGold/20
+                      transition-all
+                      resize-none
+                    "
+                  ></textarea>
+                </div>
               </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                <button type="submit" className="bg-roseGold text-white py-3 px-8 rounded-full flex-1 hover:shadow-lg transition duration-300">
-                  <i className="fas fa-calendar-alt"></i> Confirm Booking
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <button
+                  type="submit"
+                  className="
+                    flex-1
+                    py-4
+                    rounded-full
+                    bg-roseGold
+                    hover:bg-[#d89b66]
+                    text-white
+                    font-medium
+                    shadow-lg
+                    hover:shadow-roseGold/30
+                    transition-all
+                    duration-300
+                  "
+                >
+                  <i className="fas fa-calendar-check mr-2"></i>
+                  Confirm Booking
                 </button>
+
                 <a
                   href="https://wa.me/919029215892?text=Hello%20Zehra%20Glow%20%26%20Go%2C%20I%20want%20to%20book%20a%20service"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-green-600 text-white py-3 px-6 rounded-full flex items-center justify-center gap-2 hover:bg-green-700 transition"
+                  className="
+                    flex-1
+                    py-4
+                    rounded-full
+                    bg-green-600
+                    hover:bg-green-700
+                    text-white
+                    font-medium
+                    flex
+                    items-center
+                    justify-center
+                    gap-2
+                    shadow-lg
+                    transition-all
+                    duration-300
+                  "
                 >
-                  <i className="fab fa-whatsapp"></i> Book on WhatsApp
+                  <i className="fab fa-whatsapp text-xl"></i>
+                  Book on WhatsApp
                 </a>
               </div>
             </form>

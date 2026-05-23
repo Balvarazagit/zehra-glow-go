@@ -1,8 +1,37 @@
 export const featuresData = [
-  { icon: 'female', title: '100% Women Staff', description: 'Trained female professionals ensuring your comfort' },
-  { icon: 'home', title: 'Home Service', description: 'Luxury salon experience at your doorstep' },
-  { icon: 'heart', title: 'Hygienic Products', description: 'Sterilized tools and premium quality products' },
-  { icon: 'lock', title: 'Privacy Guaranteed', description: 'Complete discretion and confidentiality' },
-  { icon: 'tags', title: 'Affordable Packages', description: 'Luxury services at budget-friendly prices' },
-  { icon: 'mobile', title: 'Easy Booking', description: 'Simple online booking with instant confirmation' },
+  {
+    icon: 'female',
+    title: 'Women Beauty Experts',
+    description: 'Certified female beauty professionals for complete comfort and care.',
+  },
+
+  {
+    icon: 'home',
+    title: 'Premium Home Service',
+    description: 'Enjoy luxury salon treatments peacefully in your own home space.',
+  },
+
+  {
+    icon: 'heart',
+    title: 'Hygienic Beauty Care',
+    description: 'Clean tools and premium halal-friendly products for safe treatments.',
+  },
+
+  {
+    icon: 'lock',
+    title: 'Privacy & Comfort',
+    description: 'Private beauty sessions with complete safety and personal attention.',
+  },
+
+  {
+    icon: 'tags',
+    title: 'Affordable Luxury Plans',
+    description: 'Experience premium beauty packages at comfortable and fair pricing.',
+  },
+
+  {
+    icon: 'mobile',
+    title: 'Quick Online Booking',
+    description: 'Book appointments instantly with smooth and easy online scheduling.',
+  },
 ]

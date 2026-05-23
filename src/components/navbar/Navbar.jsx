@@ -16,14 +16,17 @@ const NavLinks = [
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   const { darkMode, toggleDarkMode } = useTheme()
   const location = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setIsScrolled(window.scrollY > 40)
     }
+
     window.addEventListener('scroll', handleScroll)
+
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -33,60 +36,166 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/90 dark:bg-[#1E1B17]/90 backdrop-blur-xl shadow-lg'
-            : 'bg-white/60 dark:bg-[#1E1B17]/60 backdrop-blur-md'
-        } border-b border-roseGold/20`}
+        className={`
+          fixed top-0 left-0 w-full z-50
+          transition-all duration-300
+          border-b border-white/10
+          ${
+            isScrolled
+              ? 'bg-white/70 dark:bg-[#141414]/80 backdrop-blur-2xl shadow-xl'
+              : 'bg-white/30 dark:bg-[#141414]/40 backdrop-blur-xl'
+          }
+        `}
       >
-        <div className="container mx-auto px-5 py-3 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2">
-            <i className="fas fa-star-of-life text-roseGold text-2xl"></i>
-            <span className="font-serif text-2xl font-semibold text-luxuryBrown dark:text-roseGold">
-              Zehra Glow & Go
-            </span>
-          </Link>
+        <div className="container mx-auto px-5 md:px-8">
+          <div className="flex items-center justify-between h-[78px]">
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex gap-8 items-center">
-            {NavLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`text-[#6B4C3A] dark:text-gray-200 hover:text-roseGold transition font-medium ${
-                  location.pathname === link.path ? 'text-roseGold border-b-2 border-roseGold' : ''
-                }`}
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-3">
+              <div className="
+                w-12 h-12
+                rounded-full
+                bg-gradient-to-br
+                from-roseGold/20
+                to-roseGold/5
+                dark:from-roseGold/30
+                dark:to-transparent
+                border border-roseGold/20
+                flex items-center justify-center
+                shadow-lg
+              ">
+                <i className="fas fa-spa text-roseGold text-xl"></i>
+              </div>
+
+              <div>
+                <h2 className="
+                  font-serif
+                  text-2xl
+                  font-bold
+                  text-luxuryBrown
+                  dark:text-white
+                ">
+                  Zehra Glow
+                </h2>
+
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Luxury Home Salon
+                </p>
+              </div>
+            </Link>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-8">
+
+              {NavLinks.map((link) => {
+                const active = location.pathname === link.path
+
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`
+                      relative
+                      text-sm
+                      font-medium
+                      transition-all
+                      duration-300
+                      ${
+                        active
+                          ? 'text-roseGold'
+                          : 'text-[#6B4C3A] dark:text-gray-300 hover:text-roseGold'
+                      }
+                    `}
+                  >
+                    {link.name}
+
+                    {active && (
+                      <motion.div
+                        layoutId="navbar-indicator"
+                        className="
+                          absolute
+                          -bottom-2
+                          left-0
+                          w-full
+                          h-[2px]
+                          bg-roseGold
+                          rounded-full
+                        "
+                      />
+                    )}
+                  </Link>
+                )
+              })}
+
+              {/* Dark Mode */}
+              <button
+                onClick={toggleDarkMode}
+                className="
+                  w-11 h-11
+                  rounded-full
+                  bg-white/60
+                  dark:bg-[#252525]
+                  border border-roseGold/20
+                  flex items-center justify-center
+                  text-roseGold
+                  hover:scale-110
+                  transition-all
+                  duration-300
+                  shadow-lg
+                "
               >
-                {link.name}
-              </Link>
-            ))}
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-roseGold/10 text-roseGold hover:bg-roseGold/20 transition"
-            >
-              <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'}`}></i>
-            </button>
-          </div>
+                <i
+                  className={`fas ${
+                    darkMode ? 'fa-sun' : 'fa-moon'
+                  }`}
+                ></i>
+              </button>
+            </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex gap-3">
-            <button
-              onClick={toggleDarkMode}
-              className="text-roseGold p-2"
-            >
-              <i className={`fas ${darkMode ? 'fa-sun' : 'fa-moon'} text-xl`}></i>
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-luxuryBrown dark:text-white"
-            >
-              <i className="fas fa-bars text-2xl"></i>
-            </button>
+            {/* Mobile */}
+            <div className="md:hidden flex items-center gap-3">
+
+              <button
+                onClick={toggleDarkMode}
+                className="
+                  w-10 h-10
+                  rounded-full
+                  bg-white/50
+                  dark:bg-[#252525]
+                  border border-roseGold/20
+                  text-roseGold
+                  flex items-center justify-center
+                "
+              >
+                <i
+                  className={`fas ${
+                    darkMode ? 'fa-sun' : 'fa-moon'
+                  }`}
+                ></i>
+              </button>
+
+              <button
+                onClick={() => setMobileMenuOpen(true)}
+                className="
+                  w-10 h-10
+                  rounded-full
+                  bg-roseGold/10
+                  border border-roseGold/20
+                  text-roseGold
+                  flex items-center justify-center
+                "
+              >
+                <i className="fas fa-bars text-lg"></i>
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
 
-      <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+      />
     </>
   )
 }
