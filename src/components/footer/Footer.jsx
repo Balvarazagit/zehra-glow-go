@@ -110,7 +110,7 @@ const Footer = () => {
                   <i className="fas fa-envelope text-roseGold"></i>
                 </div>
 
-                <span>hello@zehraglow.com</span>
+                <span>zehraglowandgo@gmail.com</span>
               </div>
             </div>
           </motion.div>
