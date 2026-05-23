@@ -94,7 +94,7 @@ const Footer = () => {
                   <i className="fas fa-phone-alt text-roseGold"></i>
                 </div>
 
-                <span>+91 90292 15892</span>
+                <span><a href="tel:+919029215892">+91 90292 15892</a></span>
               </div>
 
               <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
@@ -102,7 +102,7 @@ const Footer = () => {
                   <i className="fab fa-whatsapp text-green-500"></i>
                 </div>
 
-                <span>WhatsApp Available</span>
+                <span><a href="https://wa.me/919029215892">WhatsApp Available</a></span>
               </div>
 
               <div className="flex items-center gap-3 text-gray-600 dark:text-gray-300">
@@ -110,7 +110,7 @@ const Footer = () => {
                   <i className="fas fa-envelope text-roseGold"></i>
                 </div>
 
-                <span>zehraglowandgo@gmail.com</span>
+                <span><a href="mailto:zehraglowandgo@gmail.com">zehraglowandgo@gmail.com</a></span>
               </div>
             </div>
           </motion.div>
