@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF9F5;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, .serif {
+    font-family: 'Cormorant Garamond', serif;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #F4EAE0;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #E6B17E;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9966A;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(255, 248, 240, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 2rem;
+    border: 1px solid rgba(230, 177, 126, 0.3);
+  }
+  
+  .glass-card-dark {
+    background: rgba(30, 27, 23, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(230, 177, 126, 0.2);
+  }
+  
+  .btn-primary {
+    @apply bg-roseGold text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-roseGold text-roseGold px-8 py-3 rounded-full hover:bg-roseGold/10 transition-all duration-300;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-custom {
+    @apply container mx-auto px-5 md:px-8;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 8s ease-in-out infinite 2s;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
