@@ -204,7 +204,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-roseGold/10 mt-12 pt-6 text-center">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            © 2025 Zehra Glow & Go — Privacy & Comfort First.
+            © 2026 Zehra Glow & Go — Privacy & Comfort First.
             Islamic Elegance ✨
           </p>
 
@@ -216,7 +216,7 @@ const Footer = () => {
               rel="noreferrer"
               className="text-roseGold hover:underline font-medium"
             >
-              Balva Aliraza
+              Balva Aliraza R
             </a>
           </p>
         </div>
