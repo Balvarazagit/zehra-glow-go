@@ -216,7 +216,7 @@ const Footer = () => {
               rel="noreferrer"
               className="text-roseGold hover:underline font-medium"
             >
-              Balva Aliraza R
+              Balva.dev
             </a>
           </p>
         </div>
