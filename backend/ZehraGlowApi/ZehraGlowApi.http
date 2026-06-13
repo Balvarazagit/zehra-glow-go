@@ -1,0 +1,6 @@
+@ZehraGlowApi_HostAddress = http://localhost:5083
+
+GET {{ZehraGlowApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
