@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useBooking } from '../../context/BookingContext'
 import SectionTitle from '../common/SectionTitle'
@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 
 const Booking = () => {
   const { createBooking } = useBooking()
-
+  
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -16,7 +16,7 @@ const Booking = () => {
     time: '',
     notes: '',
   })
-
+  const [trackingId, setTrackingId] = useState("")
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -31,19 +31,30 @@ const Booking = () => {
       return
     }
 
-    await createBooking(formData)
+    try {
+      const result = await createBooking(formData)
 
-    toast.success('Booking Confirmed Successfully ✨')
+      setTrackingId(result.bookingId)
 
-    setFormData({
-      name: '',
-      phone: '',
-      service: 'Facial & Waxing Basic',
-      address: '',
-      date: '',
-      time: '',
-      notes: '',
-    })
+      localStorage.setItem(
+        "latestBookingId",
+        result.bookingId
+      )
+
+      toast.success("Booking Confirmed Successfully ✨")
+
+      setFormData({
+        name: '',
+        phone: '',
+        service: 'Facial & Waxing Basic',
+        address: '',
+        date: '',
+        time: '',
+        notes: '',
+      })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const handleChange = (e) => {
@@ -52,6 +63,14 @@ const Booking = () => {
       [e.target.name]: e.target.value,
     })
   }
+
+  useEffect(() => {
+    const savedId = localStorage.getItem("latestBookingId")
+
+    if (savedId) {
+      setTrackingId(savedId)
+    }
+  }, [])
 
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-[#FFF8F4] to-[#FFEFE7] dark:from-[#111111] dark:to-[#1A1414] overflow-hidden">
@@ -354,6 +373,35 @@ const Booking = () => {
                 </a>
               </div>
             </form>
+            {trackingId && (
+              <div
+                className="
+                  mt-6
+                  p-5
+                  rounded-2xl
+                  bg-green-50
+                  border
+                  border-green-300
+                  text-center
+                "
+              >
+                <h3 className="text-xl font-bold text-green-700">
+                  Booking Confirmed 🎉
+                </h3>
+
+                <p className="mt-2 text-gray-700">
+                  Your Tracking ID
+                </p>
+
+                <div className="mt-3 text-2xl font-bold text-green-800">
+                  {trackingId}
+                </div>
+
+                <p className="mt-3 text-sm text-gray-600">
+                  Save this Tracking ID to track your booking status.
+                </p>
+              </div>
+            )}
           </motion.div>
         </div>
       </div>

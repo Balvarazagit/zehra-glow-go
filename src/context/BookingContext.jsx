@@ -16,18 +16,36 @@ export const BookingProvider = ({ children }) => {
 
   const createBooking = async (bookingData) => {
     try {
-      // Simulate API call
-      const newBooking = {
-        id: Date.now(),
-        ...bookingData,
-        createdAt: new Date().toISOString(),
-        status: 'pending'
+      const response = await fetch(
+        "https://localhost:7123/api/bookings",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(bookingData),
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error("Failed to create booking")
       }
-      setBookings([...bookings, newBooking])
-      toast.success('Booking confirmed! We will contact you shortly.')
-      return newBooking
+
+      const result = await response.json()
+
+      localStorage.setItem(
+        "lastBookingId",
+        result.bookingId
+      )
+
+      toast.success(
+        `Booking Confirmed! ID: ${result.bookingId}`
+      )
+
+      return result
     } catch (error) {
-      toast.error('Booking failed. Please try again.')
+      console.error(error)
+      toast.error("Booking Failed")
       throw error
     }
   }

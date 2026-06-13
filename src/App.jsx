@@ -13,6 +13,9 @@ import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
 import NotFound from './pages/NotFound'
 import ScrollToTop from './components/common/ScrollToTop'
+import AdminPage from './pages/AdminPage'
+import TrackBooking from './components/TrackBooking/TrackBooking'
+import Tracking from './pages/Tracking'
 
 function App() {
   return (
@@ -41,6 +44,10 @@ function App() {
               <Route path="about" element={<AboutPage />} />
               <Route path="contact" element={<ContactPage />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/track-booking" element={<TrackBooking />} />
+              <Route path="/track-booking" element={<Tracking />}
+              />
             </Route>
           </Routes>
         </Router>
