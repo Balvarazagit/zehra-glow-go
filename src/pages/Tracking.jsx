@@ -12,7 +12,7 @@ const Tracking = () => {
       setLoading(true);
 
       const response = await fetch(
-        `https://localhost:7123/api/bookings/track/${bookingNumber}`
+        `{import.meta.env.VITE_API_URL}/api/bookings/track/${bookingNumber}`
       );
 
       if (!response.ok) {

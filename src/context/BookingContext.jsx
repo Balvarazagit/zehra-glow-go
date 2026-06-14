@@ -17,7 +17,7 @@ export const BookingProvider = ({ children }) => {
   const createBooking = async (bookingData) => {
     try {
       const response = await fetch(
-        "https://localhost:7123/api/bookings",
+        `{import.meta.env.VITE_API_URL}/api/bookings`,
         {
           method: "POST",
           headers: {

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import "./TrackBooking.css";
 
-const API_URL = "https://localhost:7123/api/bookings";
+const API_URL = `{import.meta.env.VITE_API_URL}/api/bookings`;
 
 const TrackBooking = () => {
   const [bookingId, setBookingId] = useState("");
