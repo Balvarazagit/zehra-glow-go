@@ -10,10 +10,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReact",
         policy =>
         {
-            policy
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowAnyOrigin();
+            policy.AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowAnyOrigin();
         });
 });
 
@@ -30,19 +29,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Swagger (Render + Dev both)
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
-// 👇 IMPORTANT
 app.UseCors("AllowReact");
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+// 🔥 Render PORT FIX
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+app.Urls.Add($"http://0.0.0.0:{port}");
 
 app.Run();
